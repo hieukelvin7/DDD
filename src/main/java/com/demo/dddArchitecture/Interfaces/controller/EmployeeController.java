@@ -1,7 +1,7 @@
-package com.demo.dddArchitecture.Employee.controller;
+package com.demo.dddArchitecture.Interfaces.controller;
 
-import com.demo.dddArchitecture.Employee.domain.Entity.Employee;
-import com.demo.dddArchitecture.Employee.domain.Service.FeignEmployeeService;
+import com.demo.dddArchitecture.domain.FeignDTO.FeignEmployeeService;
+import com.demo.dddArchitecture.domain.entities.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,13 +12,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/employee")
-public class EmployeeController1 {
+public class EmployeeController {
     @Autowired
     private FeignEmployeeService feignEmployeeService;
 
     @GetMapping("/")
     public List<Employee> getEmployee(){
-        return feignEmployeeService.getEmployee();
+       return feignEmployeeService.getEmployee();
     }
     @GetMapping("/{employeeId}")
     public Optional<Employee> getEmployeeById(@PathVariable("employeeId") Long id){

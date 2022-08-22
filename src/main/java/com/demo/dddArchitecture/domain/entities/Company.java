@@ -1,4 +1,4 @@
-package com.demo.dddArchitecture.Company.domain.Entity;
+package com.demo.dddArchitecture.domain.entities;
 
 import lombok.Data;
 

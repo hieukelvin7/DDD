@@ -1,7 +1,7 @@
-package com.demo.dddArchitecture.Employee.domain.Service;
+package com.demo.dddArchitecture.domain.FeignDTO;
 
 
-import com.demo.dddArchitecture.Employee.domain.Entity.Employee;
+import com.demo.dddArchitecture.domain.entities.Employee;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

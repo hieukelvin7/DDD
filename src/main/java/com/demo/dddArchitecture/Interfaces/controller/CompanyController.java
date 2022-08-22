@@ -1,7 +1,7 @@
-package com.demo.dddArchitecture.Company.controller;
+package com.demo.dddArchitecture.Interfaces.controller;
 
-import com.demo.dddArchitecture.Company.domain.Entity.Company;
-import com.demo.dddArchitecture.Company.domain.Service.FeignCompanyService;
+import com.demo.dddArchitecture.domain.entities.Company;
+import com.demo.dddArchitecture.domain.FeignDTO.FeignCompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
