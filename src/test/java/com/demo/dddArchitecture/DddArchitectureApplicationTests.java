@@ -1,0 +1,13 @@
+package com.demo.dddArchitecture;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class DddArchitectureApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
