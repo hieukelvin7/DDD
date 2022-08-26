@@ -20,12 +20,6 @@ public class DddArchitectureApplication {
 		SpringApplication.run(DddArchitectureApplication.class, args);
 		log.info("CustomerApplication Started........");
 	}
-	@Bean
-	CommandLineRunner commandLineRunner (KafkaTemplate<String, String> kafkaTemplate){
-		return args -> {
-			kafkaTemplate.send("topic1","Hello world 12345");
-		};
-	}
 
 
 }

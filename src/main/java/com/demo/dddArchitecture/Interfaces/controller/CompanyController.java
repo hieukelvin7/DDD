@@ -1,6 +1,5 @@
 package com.demo.dddArchitecture.Interfaces.controller;
 
-import com.demo.dddArchitecture.domain.entities.MessageRequest;
 import com.demo.dddArchitecture.domain.entities.Company;
 import com.demo.dddArchitecture.domain.FeignDTO.FeignCompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +40,9 @@ public class CompanyController {
     public Map<String, Boolean> deleteCompany(@PathVariable ("companyId") Long id){
         return feignCompanyService.deleteCompany(id);
     }
-    @PostMapping("/kafka")
-    public ResponseEntity<String> demokafka(@RequestBody MessageRequest request){
-        kafkaTemplate.send("topic1", request.massage());
-        return ResponseEntity.ok("Message sent to the topic");
-    }
+//    @PostMapping("/kafka")
+//    public ResponseEntity<String> demokafka(@RequestBody MessageRequest request){
+//        kafkaTemplate.send("topic1", request.massage());
+//        return ResponseEntity.ok("Message sent to the topic");
+//    }
 }

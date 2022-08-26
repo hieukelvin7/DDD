@@ -1,12 +1,17 @@
 package com.demo.dddArchitecture.domain.entities;
 
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
+
+@Data
 @Entity
-@NoArgsConstructor
-public class Employee {
+@Table(name="\"employee\"")
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
+public class Employee implements Serializable {
     @Id
     @SequenceGenerator(
             name = "employee_sequence",
@@ -14,13 +19,43 @@ public class Employee {
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "employee_sequence"
+        generator = "employee_sequence"
     )
     private  Long id;
     private String name;
     private String email;
     private String address;
     private Integer age;
+
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "company_id", nullable = false)
+    private Company company;
+
+    public Employee(String name, String email, String address, Integer age, Company company) {
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.age = age;
+        this.company = company;
+    }
+
+    public Employee() {
+    }
+
+//    public Employee(Long id, String name, String email, String address, Integer age) {
+//        this.id = id;
+//        this.name = name;
+//        this.email = email;
+//        this.address = address;
+//        this.age = age;
+//    }
+
+//    public Employee(String name, String email, String address, Integer age) {
+//        this.name = name;
+//        this.email = email;
+//        this.address = address;
+//        this.age = age;
+//    }
 
     public Long getId() {
         return id;
@@ -60,5 +95,36 @@ public class Employee {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+//    @Override
+//    public String toString() {
+//        return "Employee{" +
+//                "id=" + id +
+//                ", name='" + name + '\'' +
+//                ", email='" + email + '\'' +
+//                ", address='" + address + '\'' +
+//                ", age=" + age +
+//                '}';
+//    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", age=" + age +
+                ", company=" + company +
+                '}';
     }
 }
