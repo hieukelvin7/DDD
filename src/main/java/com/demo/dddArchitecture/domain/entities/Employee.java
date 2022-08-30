@@ -9,25 +9,34 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@Table(name="\"employee\"")
+@Table()
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class Employee implements Serializable {
-    @Id
-    @SequenceGenerator(
-            name = "employee_sequence",
-            sequenceName = "employee_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-        generator = "employee_sequence"
-    )
-    private  Long id;
+//    @Id
+//    @SequenceGenerator(
+//            name = "employee_sequence",
+//            sequenceName = "employee_sequence",
+//            allocationSize = 1
+//    )
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+//        generator = "employee_sequence"
+//    )
+//    private  Long id;
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Column(nullable = false,unique = true)
+private Long id;
+
+
     private String name;
+
     private String email;
+
     private String address;
+
     private Integer age;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER,cascade = CascadeType.MERGE)
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
 

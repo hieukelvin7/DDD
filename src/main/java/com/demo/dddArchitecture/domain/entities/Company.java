@@ -6,18 +6,26 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table
+@Table()
+//name="\"company\""
 public class Company {
-    @Id
-    @SequenceGenerator(
-            name = "company_sequence",
-            sequenceName = "company_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "company_sequence"
-    )
-    private  Long id;
+//    @Id
+//    @SequenceGenerator(
+//            name = "company_sequence",
+//            sequenceName = "company_sequence",
+//            allocationSize = 1
+//    )
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+//            generator = "company_sequence"
+//    )
+
+//    private  Long id;
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Column(nullable = false,unique = true)
+private Long id;
+
+
     private String name;
 
     public Company(Long id, String name) {

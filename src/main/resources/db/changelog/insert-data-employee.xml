@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="02" author="hieu">
+        <comment>Inserting employee</comment>
+        <insert tableName="employee">
+            <column name="id" valueNumeric="1"/>
+            <column name="name" value="tran ba hieu"/>
+            <column name="email" value="hieu@gmail.com"/>
+            <column name="address" value="ho chi minh"/>
+            <column name="age" valueNumeric="22"/>
+            <column name="company_id" valueNumeric="1"/>
+        </insert>
+
+        <insert tableName="employee">
+            <column name="id" valueNumeric="2"/>
+            <column name="name" value="nguyen van a"/>
+            <column name="email" value="nva@gmail.com"/>
+            <column name="address" value="ho chi minh"/>
+            <column name="age" valueNumeric="22"/>
+            <column name="company_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="employee">
+            <column name="id" valueNumeric="3"/>
+            <column name="name" value="le ngoc b"/>
+            <column name="email" value="lnb@gmail.com"/>
+            <column name="address" value="ha noi"/>
+            <column name="age" valueNumeric="22"/>
+            <column name="company_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="employee">
+            <column name="id" valueNumeric="4"/>
+            <column name="name" value="nguyen thi hoa a"/>
+            <column name="email" value="ntha@gmail.com"/>
+            <column name="address" value="da nang"/>
+            <column name="age" valueNumeric="22"/>
+            <column name="company_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="employee">
+            <column name="id" valueNumeric="5"/>
+            <column name="name" value="hoang van d"/>
+            <column name="email" value="hvd@gmail.com"/>
+            <column name="address" value="ha noi"/>
+            <column name="age" valueNumeric="22"/>
+            <column name="company_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="employee">
+            <column name="id" valueNumeric="6"/>
+            <column name="name" value="trinh cong a"/>
+            <column name="email" value="tca@gmail.com"/>
+            <column name="address" value="ho chi minh"/>
+            <column name="age" valueNumeric="22"/>
+            <column name="company_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="employee">
+            <column name="id" valueNumeric="7"/>
+            <column name="name" value="aaaaaa"/>
+            <column name="email" value="taaaaaaaaaaa"/>
+            <column name="address" value="aaaaaaa"/>
+            <column name="age" valueNumeric="22"/>
+            <column name="company_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="employee">
+            <column name="id" valueNumeric="8"/>
+            <column name="name" value="BBBBBBBBBB"/>
+            <column name="email" value="BBBBBBBBB"/>
+            <column name="address" value="BBBBBBB"/>
+            <column name="age" valueNumeric="22"/>
+            <column name="company_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="employee">
+            <column name="id" valueNumeric="9"/>
+            <column name="name" value="CCCCCC"/>
+            <column name="email" value="CCCCCCCC"/>
+            <column name="address" value="CCCCCCCC"/>
+            <column name="age" valueNumeric="22"/>
+            <column name="company_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="employee">
+            <column name="id" valueNumeric="10"/>
+            <column name="name" value="asdasdasd"/>
+            <column name="email" value="asdasdasd"/>
+            <column name="address" value="asdasdasd"/>
+            <column name="age" valueNumeric="22"/>
+            <column name="company_id" valueNumeric="4"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

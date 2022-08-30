@@ -1,65 +1,53 @@
 package com.demo.dddArchitecture;
 
 
-import com.demo.dddArchitecture.domain.entities.Company;
 import com.demo.dddArchitecture.domain.entities.CompanyChecking;
 import com.demo.dddArchitecture.domain.entities.Employee;
-import com.fasterxml.jackson.core.JsonParseException;
+import com.demo.dddArchitecture.infrastructure.repository.CompanyCheckingRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.google.gson.Gson;
-import kafka.utils.json.JsonObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 
-@Service
+@Service @AllArgsConstructor @Slf4j
 public class KafkaListeners {
-
-//    @Autowired
-//    private OrderSaveByFeignClient orderSaveByFeignClient;
+    private final CompanyCheckingRepository companyCheckingRepository;
 
 
-    public Object deSerializedData(String str) {
-        ObjectMapper mapper = new ObjectMapper();
-        Object obj = null;
-        try {
-            obj = mapper.readValue(str, Object.class);
-        } catch (JsonParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (JsonMappingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return obj;
-    }
+
     @KafkaListener(topics = "topic1", groupId = "groupId")
     public void consume(String msg, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) throws JsonProcessingException {
-        //CompanyChecking companyChecking = new CompanyChecking(msg);
         ObjectMapper mapper = new ObjectMapper();
-        System.out.println(msg +" from "+topic);
-
         List<Employee> participantJsonList = mapper.readValue(msg, new TypeReference<List<Employee>>(){});
+        for (int i =0 ; i<participantJsonList.size(); i++) {
+            Long id = participantJsonList.get(i).getId();//lay id tung nv
+            long idcompany = participantJsonList.get(i).getCompany().getId();
+            List<CompanyChecking> isCompany = companyCheckingRepository.findCompanyId(idcompany);
+            List<CompanyChecking> isEmployee = companyCheckingRepository.findEmployeeId(id);
 
-
+            if (!isCompany.isEmpty()) {
+                if (isEmployee.isEmpty()) {
+                        CompanyChecking companyChecking = new CompanyChecking(participantJsonList.get(i), participantJsonList.get(i).getCompany().getId());
+                        companyCheckingRepository.save(companyChecking);
+                }
+            } else {
+                CompanyChecking companyChecking = new CompanyChecking(participantJsonList.get(i), participantJsonList.get(i).getCompany().getId());
+                companyCheckingRepository.save(companyChecking);
+            }
+        }
 
     }
 

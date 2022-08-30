@@ -10,49 +10,48 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name="\"companyChecking\"")
+@Table()
 public class CompanyChecking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @Column(name = "id",nullable = false)
     private Long id;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "employee_list_id")
+    private Employee employeeList;
 
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    @Column(name = "uuid", updatable = false, nullable = false)
-    private UUID uuid;
+//    @OneToMany(cascade = CascadeType.MERGE)
+//    @Column(name = "company_list")
+//    private List<Employee> employeeList;
 
-//    @ManyToOne(fetch=FetchType.EAGER)
-//    @JoinColumn(name = "company_id", nullable = false)
-//    private Company company;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Employee> employeeList;
+    //@ManyToOne(cascade = CascadeType.MERGE)
+//    @Column(name = "company_list")
+    //private Long company_list_id;
+    //@ManyToOne(cascade = CascadeType.MERGE)
+    //@JoinColumn(name = "employee_list_id")
+    private Long company_id;
 
 
-    public CompanyChecking(UUID uuid, List<Employee> employeeList) {
-        this.uuid = uuid;
+    public CompanyChecking(Employee employeeList, Long company_id) {
         this.employeeList = employeeList;
+        this.company_id = company_id;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public Long getCompany_id() {
+        return company_id;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public void setCompany_id(Long company_id) {
+        this.company_id = company_id;
     }
 
-    public List<Employee> getEmployeeList() {
+    public Employee getEmployeeList() {
         return employeeList;
     }
 
-    public void setEmployeeList(List<Employee> employeeList) {
+    public void setEmployeeList(Employee employeeList) {
         this.employeeList = employeeList;
     }
 
@@ -63,7 +62,8 @@ public class CompanyChecking {
     public String toString() {
         return "CompanyChecking{" +
                 "id=" + id +
-                ", uuid=" + uuid +
+                ", employeeList=" + employeeList +
+                ", company_id=" + company_id +
                 '}';
     }
 }
